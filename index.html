@@ -3,483 +3,793 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portafolio - Jesús Eduardo Hernández Vázquez</title>
+  <title>Jesús Eduardo Hernández — Fullstack Developer</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="icon" href="assets/images/img-20201221-184259565-2-128x157.png" type="image/png" />
-  <!-- AOS Animations -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="icon" href="assets/images/img-20201221-184259565-2-128x157.png" type="image/png" />
   <style>
-    .btn-anim:hover { transform: scale(1.05); }
-    .card-hover { transition: transform .3s ease, box-shadow .3s ease; }
-    .card-hover:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 25px rgba(0,0,0,.15); }
+    * { font-family: 'Inter', sans-serif; }
+    html { scroll-behavior: smooth; }
 
-    /* Plain CSS versions (no @apply) */
-    .btn { display:inline-flex; align-items:center; justify-content:center; padding:0.5rem 1rem; border-radius:0.5rem; font-weight:500; transition: background-color .2s ease, transform .2s ease, opacity .2s ease; }
-    .btn-primary { background-color:#6366f1; color:#fff; }
-    .btn-primary:hover { background-color:#4f46e5; }
-    .btn-ghost { background-color:#374151; color:#fff; }
-    .btn-ghost:hover { background-color:#1f2937; }
-    .pill { display:inline-block; font-size:0.75rem; line-height:1rem; font-weight:600; border-radius:9999px; padding:0.25rem 0.625rem; background:#f3f4f6; color:#374151; }
-    .filter-btn-active { background:#4f46e5 !important; color:#fff !important; }
-    .disabled-link { pointer-events:none; opacity:.6; }
+    /* Hero */
+    .hero-gradient {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-gradient::before {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(99,102,241,.18) 0%, transparent 70%);
+      top: -150px; right: -150px;
+      pointer-events: none;
+    }
+    .hero-gradient::after {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(167,139,250,.12) 0%, transparent 70%);
+      bottom: -80px; left: -80px;
+      pointer-events: none;
+    }
+
+    /* Photo */
+    .photo-glow {
+      box-shadow: 0 0 0 4px #6366f1, 0 0 60px rgba(99,102,241,.35);
+    }
+
+    /* Navbar */
+    .nav-glass {
+      background: rgba(15,23,42,.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(99,102,241,.18);
+    }
+
+    /* Cards */
+    .card-glass {
+      background: #fff;
+      border: 1px solid rgba(99,102,241,.1);
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    }
+    .card-glass:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(99,102,241,.14);
+      border-color: rgba(99,102,241,.28);
+    }
+
+    /* Skill chips */
+    .skill-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: .72rem;
+      font-weight: 500;
+      background: rgba(99,102,241,.08);
+      color: #6366f1;
+      border: 1px solid rgba(99,102,241,.2);
+    }
+
+    /* Pills on project cards */
+    .pill {
+      display: inline-block;
+      font-size: .68rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      padding: 2px 8px;
+      background: rgba(99,102,241,.1);
+      color: #6366f1;
+      border: 1px solid rgba(99,102,241,.2);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: .6rem 1.4rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: .875rem;
+      transition: all .2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(99,102,241,.3);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(99,102,241,.4);
+    }
+    .btn-ghost {
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.15); }
+
+    /* Filter tabs */
+    .filter-btn { transition: all .2s ease; }
+    .filter-btn-active {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
+      color: #fff !important;
+      box-shadow: 0 4px 12px rgba(99,102,241,.28);
+    }
+
+    /* Timeline */
+    .timeline-item { position: relative; padding-left: 2rem; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: -2rem;
+      width: 2px;
+      background: linear-gradient(to bottom, #6366f1, #8b5cf6);
+    }
+    .timeline-item:last-child::before { bottom: 0; }
+    .timeline-dot {
+      position: absolute;
+      left: -5px; top: 8px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99,102,241,.25);
+    }
+
+    /* Project image zoom */
+    .project-img-wrap { overflow: hidden; }
+    .project-img-wrap img { transition: transform .4s ease; }
+    .project-img-wrap:hover img { transform: scale(1.06); }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #6366f1, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Section alternation */
+    .section-alt { background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%); }
+
+    /* Stat numbers */
+    .stat-num {
+      font-size: 2.4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #6366f1, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    /* Skill icon wrapper */
+    .skill-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Scroll to top */
+    #scrollTop {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 14px rgba(99,102,241,.4);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: all .3s ease;
+      z-index: 999;
+    }
+    #scrollTop.visible { opacity: 1; transform: translateY(0); }
+    #scrollTop:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(99,102,241,.5); }
+
+    /* Mobile menu */
+    #mobileMenu { display: none; }
+    #mobileMenu.open { display: flex; }
+
+    /* Disabled link */
+    .disabled-link { pointer-events: none; opacity: .5; }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-slate-50 text-gray-900">
 
-  <!-- NAVBAR -->
-  <header class="bg-gray-900 text-white py-4 shadow-md sticky top-0 z-50">
+  <!-- ─── NAVBAR ─── -->
+  <header class="nav-glass text-white py-4 sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
-      <a href="#" class="text-2xl font-bold">Jesús Eduardo</a>
-      <nav class="hidden md:flex items-center gap-6">
-        <a id="navPortfolio" href="#portafolio" class="hover:opacity-80">Portafolio</a>
-        <a id="navExperience" href="#experiencia" class="hover:opacity-80">Experiencia</a>
-        <a id="navContact" href="#contacto" class="hover:opacity-80">Contacto</a>
+      <a href="#" class="flex items-center gap-2 text-xl font-bold">
+        <span class="gradient-text">JE</span>
+        <span class="text-white font-light">Hernández</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8">
+        <a id="navPortfolio"  href="#portafolio"  class="text-sm text-gray-300 hover:text-white transition-colors">Portafolio</a>
+        <a id="navExperience" href="#experiencia" class="text-sm text-gray-300 hover:text-white transition-colors">Experiencia</a>
+        <a id="navContact"    href="#contacto"    class="text-sm text-gray-300 hover:text-white transition-colors">Contacto</a>
       </nav>
       <div class="flex items-center gap-3">
-        <button id="langBtn" class="btn btn-primary">EN</button>
-        <a href="https://linkedin.com/in/jesuseduardohdez" target="_blank" class="btn btn-ghost">LinkedIn</a>
+        <button id="langBtn" class="btn btn-ghost text-sm px-3 py-2">EN</button>
+        <a href="https://linkedin.com/in/jesuseduardohdez" target="_blank" class="btn btn-primary text-sm hidden md:inline-flex">
+          <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+        <button id="hamburger" class="md:hidden text-white text-xl">
+          <i class="fas fa-bars"></i>
+        </button>
       </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="flex-col gap-4 px-6 pt-4 pb-6 md:hidden border-t border-white/10 mt-3">
+      <a id="mNavPortfolio"  href="#portafolio"  class="text-sm text-gray-300 hover:text-white">Portafolio</a>
+      <a id="mNavExperience" href="#experiencia" class="text-sm text-gray-300 hover:text-white">Experiencia</a>
+      <a id="mNavContact"    href="#contacto"    class="text-sm text-gray-300 hover:text-white">Contacto</a>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="bg-gray-900 text-white">
-    <div class="max-w-6xl mx-auto px-6 py-16 md:py-20 grid md:grid-cols-2 gap-10 items-center">
-      <div data-aos="fade-right">
-        <h1 id="heroTitle" class="text-4xl md:text-6xl font-bold leading-tight">
-          Hola, soy <span class="text-indigo-400">Jesús Eduardo</span>
+  <!-- ─── HERO ─── -->
+  <section class="hero-gradient text-white min-h-screen flex items-center">
+    <div class="max-w-6xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-16 items-center w-full">
+
+      <div data-aos="fade-right" data-aos-duration="800" class="relative z-10">
+        <span class="inline-flex items-center gap-2 text-indigo-400 text-sm font-medium mb-5">
+          <span class="w-8 h-px bg-indigo-400 inline-block"></span>
+          Fullstack Developer
+        </span>
+        <h1 id="heroTitle" class="text-5xl md:text-6xl font-extrabold leading-tight">
+          Hola, soy <br><span class="gradient-text">Jesús Eduardo</span>
         </h1>
-        <p id="heroSubtitle" class="mt-4 text-lg md:text-xl text-gray-300">
+        <p id="heroSubtitle" class="mt-5 text-lg text-gray-300 leading-relaxed max-w-md">
           Desarrollador Fullstack con Maestría en Tecnologías de la Información.
         </p>
-        <div class="mt-6 flex gap-3">
-          <a href="#portafolio" id="btnProjects" class="btn btn-primary btn-anim">Ver Proyectos</a>
-          <a href="https://linkedin.com/in/jesuseduardohdez" target="_blank" id="btnLinkedIn" class="btn btn-ghost btn-anim">Ver LinkedIn</a>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#portafolio" id="btnProjects" class="btn btn-primary">
+            <i class="fas fa-rocket"></i> Ver Proyectos
+          </a>
+          <a href="https://linkedin.com/in/jesuseduardohdez" target="_blank" id="btnLinkedIn" class="btn btn-ghost">
+            <i class="fab fa-linkedin"></i> Ver LinkedIn
+          </a>
+        </div>
+        <!-- Stats row -->
+        <div class="mt-10 flex gap-10 pt-8 border-t border-white/10">
+          <div>
+            <div class="stat-num">6+</div>
+            <div id="statYears" class="text-gray-400 text-sm mt-1">Años exp.</div>
+          </div>
+          <div>
+            <div class="stat-num">10+</div>
+            <div id="statProjects" class="text-gray-400 text-sm mt-1">Proyectos</div>
+          </div>
+          <div>
+            <div class="stat-num">3+</div>
+            <div id="statCompanies" class="text-gray-400 text-sm mt-1">Empresas</div>
+          </div>
         </div>
       </div>
-      <div data-aos="fade-left" class="flex justify-center">
-        <img src="assets/images/jesus2.png" alt="Jesús Eduardo" class="rounded-full shadow-lg border-4 border-indigo-500 w-60 h-60 md:w-72 md:h-72 object-cover">
+
+      <div data-aos="fade-left" data-aos-duration="800" class="flex justify-center relative z-10">
+        <div class="relative">
+          <div class="absolute inset-0 rounded-full bg-indigo-500/20 blur-3xl scale-110"></div>
+          <img src="assets/images/jesus2.png" alt="Jesús Eduardo"
+               class="relative rounded-full photo-glow w-64 h-64 md:w-80 md:h-80 object-cover">
+        </div>
       </div>
+
     </div>
   </section>
 
-  <!-- SOBRE MÍ -->
-  <section class="max-w-6xl mx-auto px-6 py-16" data-aos="fade-up">
-    <h2 id="aboutTitle" class="text-3xl font-bold text-center">Sobre mí</h2>
-    <p id="aboutText" class="mt-6 text-center text-lg text-gray-600 max-w-3xl mx-auto">
+  <!-- ─── SOBRE MÍ ─── -->
+  <section class="max-w-6xl mx-auto px-6 py-20" data-aos="fade-up">
+    <div class="text-center mb-3">
+      <span id="aboutLabel" class="text-indigo-500 text-xs font-semibold uppercase tracking-widest">Quién soy</span>
+    </div>
+    <h2 id="aboutTitle" class="text-4xl font-bold text-center">Sobre mí</h2>
+    <p id="aboutText" class="mt-6 text-center text-lg text-gray-500 max-w-3xl mx-auto leading-relaxed">
       Soy egresado de la carrera de Sistemas Computacionales Administrativos y cuento con una Maestría en Tecnologías de la Información. Tengo experiencia en desarrollo fullstack, análisis de datos y soluciones en la nube. Me apasiona crear aplicaciones funcionales y escalables, optimizar procesos y aportar soluciones tecnológicas a problemas reales.
     </p>
   </section>
 
-  <!-- HABILIDADES -->
-  <section class="bg-gray-100 py-16">
+  <!-- ─── HABILIDADES ─── -->
+  <section class="section-alt py-20">
     <div class="max-w-6xl mx-auto px-6">
-      <h2 id="skillsTitle" class="text-3xl font-bold text-center">Habilidades</h2>
-      <div class="grid md:grid-cols-3 gap-8 mt-10">
-        <div class="bg-white shadow rounded-lg p-6 card-hover" data-aos="zoom-in">
-          <h3 class="text-xl font-bold mb-3 text-indigo-500">Frontend</h3>
-          <p>HTML5, CSS3, JavaScript (ES6+), React, Vite, TailwindCSS</p>
+      <div class="text-center mb-3">
+        <span id="skillsLabel" class="text-indigo-500 text-xs font-semibold uppercase tracking-widest">Tecnologías</span>
+      </div>
+      <h2 id="skillsTitle" class="text-4xl font-bold text-center">Habilidades</h2>
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+
+        <div class="rounded-2xl p-8 card-glass" data-aos="fade-up">
+          <div class="skill-icon bg-indigo-50">
+            <i class="fas fa-desktop text-indigo-500"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-4">Frontend</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Vite</span>
+            <span class="skill-tag">TailwindCSS</span>
+          </div>
         </div>
-        <div class="bg-white shadow rounded-lg p-6 card-hover" data-aos="zoom-in" data-aos-delay="100">
-          <h3 class="text-xl font-bold mb-3 text-indigo-500">Backend</h3>
-          <p>Node.js, PHP (Laravel), Java, APIs REST, Prisma, JWT</p>
+
+        <div class="rounded-2xl p-8 card-glass" data-aos="fade-up" data-aos-delay="100">
+          <div class="skill-icon bg-violet-50">
+            <i class="fas fa-server text-violet-500"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-4">Backend</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">PHP</span>
+            <span class="skill-tag">Laravel</span>
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">REST APIs</span>
+            <span class="skill-tag">Prisma</span>
+            <span class="skill-tag">JWT</span>
+          </div>
         </div>
-        <div class="bg-white shadow rounded-lg p-6 card-hover" data-aos="zoom-in" data-aos-delay="200">
-          <h3 class="text-xl font-bold mb-3 text-indigo-500">Cloud & Data</h3>
-          <p>Vercel, AWS, Docker, BigQuery, Redshift, MySQL, PostgreSQL, Kibana, Segment</p>
+
+        <div class="rounded-2xl p-8 card-glass" data-aos="fade-up" data-aos-delay="200">
+          <div class="skill-icon bg-blue-50">
+            <i class="fas fa-cloud text-blue-500"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-4">Cloud & Data</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag">Vercel</span>
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">BigQuery</span>
+            <span class="skill-tag">Redshift</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">Kibana</span>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- PORTAFOLIO -->
-  <section id="portafolio" class="max-w-6xl mx-auto px-6 py-16">
-    <div class="flex items-end justify-between gap-4">
-      <h2 id="portfolioTitle" class="text-3xl font-bold">Portafolio</h2>
-      <!-- Filtros -->
-      <div class="flex gap-2" role="tablist" aria-label="Filtro de proyectos">
-        <button class="px-3 py-1 rounded-lg bg-gray-200 hover:bg-gray-300 text-sm filter-btn filter-btn-active" data-filter="all">Todos</button>
-        <button class="px-3 py-1 rounded-lg bg-gray-200 hover:bg-gray-300 text-sm filter-btn" data-filter="empleo">Empleo</button>
-        <button class="px-3 py-1 rounded-lg bg-gray-200 hover:bg-gray-300 text-sm filter-btn" data-filter="personal">Personal</button>
+  <!-- ─── PORTAFOLIO ─── -->
+  <section id="portafolio" class="max-w-6xl mx-auto px-6 py-20">
+    <div class="text-center mb-3">
+      <span id="portfolioLabel" class="text-indigo-500 text-xs font-semibold uppercase tracking-widest">Mi trabajo</span>
+    </div>
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-10">
+      <h2 id="portfolioTitle" class="text-4xl font-bold">Portafolio</h2>
+      <div class="flex gap-1 bg-gray-100 p-1 rounded-xl" role="tablist">
+        <button class="px-4 py-2 rounded-lg text-sm font-medium filter-btn filter-btn-active" data-filter="all">Todos</button>
+        <button class="px-4 py-2 rounded-lg text-sm font-medium text-gray-500 filter-btn hover:text-gray-800" data-filter="empleo">Empleo</button>
+        <button class="px-4 py-2 rounded-lg text-sm font-medium text-gray-500 filter-btn hover:text-gray-800" data-filter="personal">Personal</button>
       </div>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-      <!-- Telcel (Empleo) -->
-      <article class="bg-white shadow rounded-lg overflow-hidden card-hover project-card" data-type="empleo" data-aos="flip-left">
-        <img src="assets/images/Telcel-Logo.png" alt="Telcel" class="w-full h-44 object-contain bg-gray-100">
+      <!-- Telcel -->
+      <article class="rounded-2xl overflow-hidden card-glass project-card" data-type="empleo" data-aos="fade-up">
+        <div class="project-img-wrap h-44 bg-gray-50 flex items-center justify-center p-6">
+          <img src="assets/images/Telcel-Logo.png" alt="Telcel" class="max-h-full max-w-full object-contain">
+        </div>
         <div class="p-6">
-          <div class="flex items-center gap-2 mb-2">
+          <div class="flex flex-wrap gap-1 mb-3">
             <span class="pill">Empleo</span>
             <span class="pill">Monitoreo</span>
-            <span class="pill">Análisis</span>
-            <span class="pill">Consultora</span>
+            <span class="pill">Analytics</span>
           </div>
-          <h3 id="project1Title" class="font-bold text-xl">Tienda en línea Telcel</h3>
-          <p id="project1Desc" class="mt-2 text-gray-600">
-            Monitoreo y análisis de rendimiento de la tienda en línea; análisis de errores en nodos de red a través de Global Hitss.
+          <h3 id="project1Title" class="font-bold text-lg mb-2">Tienda en línea Telcel</h3>
+          <p id="project1Desc" class="text-gray-500 text-sm leading-relaxed">
+            Monitoreo y análisis de rendimiento; análisis de errores en nodos de red vía Global Hitss.
           </p>
-          <div class="mt-3 text-sm text-gray-500">Stack: Kibana, Segment, SQL</div>
-          <a href="https://www.telcel.com/tienda" target="_blank" id="project1Btn" class="text-indigo-600 font-medium mt-4 inline-flex items-center gap-1">
-            Visitar proyecto <span aria-hidden>→</span>
-          </a>
+          <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
+            <span class="text-xs text-gray-400">Kibana · Segment · SQL</span>
+            <a href="https://www.telcel.com/tienda" target="_blank" id="project1Btn"
+               class="text-indigo-600 font-semibold text-sm hover:text-indigo-800 flex items-center gap-1">
+              Ver <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
         </div>
       </article>
 
-      <!-- Auto Refacciones (Empleo/Freelance) -->
-      <article class="bg-white shadow rounded-lg overflow-hidden card-hover project-card" data-type="empleo" data-aos="flip-left" data-aos-delay="100">
-        <img src="assets/images/logo-1-438x235.jpeg" alt="Auto Refacciones" class="w-full h-44 object-contain bg-gray-100">
+      <!-- Auto Refacciones -->
+      <article class="rounded-2xl overflow-hidden card-glass project-card" data-type="empleo" data-aos="fade-up" data-aos-delay="100">
+        <div class="project-img-wrap h-44 bg-gray-50 flex items-center justify-center p-6">
+          <img src="assets/images/logo-1-438x235.jpeg" alt="Auto Refacciones" class="max-h-full max-w-full object-contain">
+        </div>
         <div class="p-6">
-          <div class="flex items-center gap-2 mb-2">
+          <div class="flex flex-wrap gap-1 mb-3">
             <span class="pill">Empleo</span>
             <span class="pill">Landing</span>
           </div>
-          <h3 id="project2Title" class="font-bold text-xl">Auto Refacciones</h3>
-          <p id="project2Desc" class="mt-2 text-gray-600">
+          <h3 id="project2Title" class="font-bold text-lg mb-2">Auto Refacciones</h3>
+          <p id="project2Desc" class="text-gray-500 text-sm leading-relaxed">
             Landing page para cotizaciones y contacto con clientes.
           </p>
-          <div class="mt-3 text-sm text-gray-500">Stack: HTML, CSS, JS</div>
-          <a href="http://autorefaccionesmexico.com.mx/" target="_blank" id="project2Btn" class="text-indigo-600 font-medium mt-4 inline-flex items-center gap-1">
-            Visitar proyecto <span aria-hidden>→</span>
-          </a>
-        </div>
-      </article>
-
-      <!-- Quaxar (Empleo) -->
-      <article class="bg-white shadow rounded-lg overflow-hidden card-hover project-card" data-type="empleo" data-aos="flip-left" data-aos-delay="200">
-        <img src="assets/images/qx-logo.webp" alt="Quaxar" class="w-full h-44 object-contain bg-gray-100">
-        <div class="p-6">
-          <div class="flex items-center gap-2 mb-2">
-            <span class="pill">Empleo</span>
-            <span class="pill">Consultora</span>
-            <span class="pill">CDP</span>
-            <span class="pill">Optimización</span>
+          <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
+            <span class="text-xs text-gray-400">HTML · CSS · JS</span>
+            <a href="http://autorefaccionesmexico.com.mx/" target="_blank" id="project2Btn"
+               class="text-indigo-600 font-semibold text-sm hover:text-indigo-800 flex items-center gap-1">
+              Ver <i class="fas fa-arrow-right text-xs"></i>
+            </a>
           </div>
-          <h3 id="project3Title" class="font-bold text-xl">Quaxar</h3>
-          <p id="project3Desc" class="mt-2 text-gray-600">
-            Consultora: servicio a Grupo Bimbo (Barcel) y SYD. Manejo de CDP para seguimiento de clientes de Tequila Don Julio.
-          </p>
-          <div class="mt-3 text-sm text-gray-500">Stack: JS, CDP, Analytics</div>
-          <a href="https://www.quaxar.com/" target="_blank" id="project3Btn" class="text-indigo-600 font-medium mt-4 inline-flex items-center gap-1">
-            Visitar proyecto <span aria-hidden>→</span>
-          </a>
         </div>
       </article>
 
-      <!-- HV Solutions (Personal) -->
-      <article class="bg-white shadow rounded-lg overflow-hidden card-hover project-card" data-type="personal" data-aos="flip-left">
-        <div class="relative">
-          <img src="assets/images/HV.png" alt="HV Solutions" class="w-full h-44 object-cover bg-gray-100">
+      <!-- Quaxar -->
+      <article class="rounded-2xl overflow-hidden card-glass project-card" data-type="empleo" data-aos="fade-up" data-aos-delay="200">
+        <div class="project-img-wrap h-44 bg-gray-50 flex items-center justify-center p-6">
+          <img src="assets/images/qx-logo.webp" alt="Quaxar" class="max-h-full max-w-full object-contain">
         </div>
         <div class="p-6">
-          <div class="flex items-center gap-2 mb-2">
+          <div class="flex flex-wrap gap-1 mb-3">
+            <span class="pill">Empleo</span>
+            <span class="pill">CDP</span>
+            <span class="pill">Analytics</span>
+          </div>
+          <h3 id="project3Title" class="font-bold text-lg mb-2">Quaxar</h3>
+          <p id="project3Desc" class="text-gray-500 text-sm leading-relaxed">
+            Consultora para Grupo Bimbo (Barcel) y SYD. CDP para seguimiento de clientes de Tequila Don Julio.
+          </p>
+          <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
+            <span class="text-xs text-gray-400">JS · CDP · Analytics</span>
+            <a href="https://www.quaxar.com/" target="_blank" id="project3Btn"
+               class="text-indigo-600 font-semibold text-sm hover:text-indigo-800 flex items-center gap-1">
+              Ver <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- HV Solutions -->
+      <article class="rounded-2xl overflow-hidden card-glass project-card" data-type="personal" data-aos="fade-up">
+        <div class="project-img-wrap h-44 bg-gray-50 flex items-center justify-center p-6">
+          <img src="assets/images/HV.png" alt="HV Solutions" class="max-h-full max-w-full object-contain">
+        </div>
+        <div class="p-6">
+          <div class="flex flex-wrap gap-1 mb-3">
             <span class="pill">Personal</span>
             <span class="pill">Brand</span>
-            <span class="pill">Landing</span>
           </div>
-          <h3 class="font-bold text-xl" id="hvTitle">HV Solutions</h3>
-          <p class="mt-2 text-gray-600" id="hvDesc">
+          <h3 id="hvTitle" class="font-bold text-lg mb-2">HV Solutions</h3>
+          <p id="hvDesc" class="text-gray-500 text-sm leading-relaxed">
             Web de mi emprendimiento de soluciones digitales (servicios, contacto y portafolio).
           </p>
-          <div class="mt-3 text-sm text-gray-500">Stack: React, Vite, Tailwind, Vercel</div>
-          <a href="https://hv-solutions.vercel.app/" target="_blank" id="hvBtn" class="text-indigo-600 font-medium mt-4 inline-flex items-center gap-1">
-            Ver sitio <span aria-hidden>→</span>
-          </a>
+          <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
+            <span class="text-xs text-gray-400">React · Vite · Tailwind</span>
+            <a href="https://hv-solutions.vercel.app/" target="_blank" id="hvBtn"
+               class="text-indigo-600 font-semibold text-sm hover:text-indigo-800 flex items-center gap-1">
+              Ver <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
         </div>
       </article>
 
-      <!-- POS System (Personal) -->
-      <article class="bg-white shadow rounded-lg overflow-hidden card-hover project-card" data-type="personal" data-aos="flip-left" data-aos-delay="100">
-        <img src="assets/images/pos.png" alt="POS System" class="w-full h-44 object-cover bg-gray-100">
+      <!-- POS System -->
+      <article class="rounded-2xl overflow-hidden card-glass project-card" data-type="personal" data-aos="fade-up" data-aos-delay="100">
+        <div class="project-img-wrap h-44 bg-gray-50 overflow-hidden">
+          <img src="assets/images/pos.png" alt="POS System" class="w-full h-full object-cover">
+        </div>
         <div class="p-6">
-          <div class="flex items-center gap-2 mb-2">
+          <div class="flex flex-wrap gap-1 mb-3">
             <span class="pill">Personal</span>
-            <span class="pill">Punto de Venta</span>
+            <span class="pill">POS</span>
           </div>
-          <h3 class="font-bold text-xl" id="posTitle">POS System</h3>
-          <p class="mt-2 text-gray-600" id="posDesc">
+          <h3 id="posTitle" class="font-bold text-lg mb-2">POS System</h3>
+          <p id="posDesc" class="text-gray-500 text-sm leading-relaxed">
             Sistema de punto de venta con inventario, entradas/salidas y corte de caja.
           </p>
-          <div class="mt-3 text-sm text-gray-500">Stack: React, Node.js, Prisma, PostgreSQL</div>
-          <a href="https://pos-system-theta-three.vercel.app/" target="_blank" id="posBtn" class="text-indigo-600 font-medium mt-4 inline-flex items-center gap-1">
-            Visitar proyecto <span aria-hidden>→</span>
-          </a>
+          <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
+            <span class="text-xs text-gray-400">React · Node.js · PostgreSQL</span>
+            <a href="https://pos-system-theta-three.vercel.app/" target="_blank" id="posBtn"
+               class="text-indigo-600 font-semibold text-sm hover:text-indigo-800 flex items-center gap-1">
+              Ver <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
         </div>
       </article>
 
-      <!-- Tejer con Pandy (Personal) -->
-      <article class="bg-white shadow rounded-lg overflow-hidden card-hover project-card" data-type="personal" data-aos="flip-left" data-aos-delay="200">
-        <img src="assets/images/tejer.png" alt="Tejer con Pandy" class="w-full h-44 object-cover bg-gray-100">
+      <!-- Tejer con Pandy -->
+      <article class="rounded-2xl overflow-hidden card-glass project-card" data-type="personal" data-aos="fade-up" data-aos-delay="200">
+        <div class="project-img-wrap h-44 bg-gray-50 overflow-hidden">
+          <img src="assets/images/tejer.png" alt="Tejer con Pandy" class="w-full h-full object-cover">
+        </div>
         <div class="p-6">
-          <div class="flex items-center gap-2 mb-2">
+          <div class="flex flex-wrap gap-1 mb-3">
             <span class="pill">Personal</span>
             <span class="pill">E-commerce</span>
           </div>
-          <h3 class="font-bold text-xl" id="crochetTitle">Tejer con Pandy</h3>
-          <p class="mt-2 text-gray-600" id="crochetDesc">
+          <h3 id="crochetTitle" class="font-bold text-lg mb-2">Tejer con Pandy</h3>
+          <p id="crochetDesc" class="text-gray-500 text-sm leading-relaxed">
             Sitio de crochet con catálogo y contacto para pedidos.
           </p>
-          <div class="mt-3 text-sm text-gray-500">Stack: React, Vite, Tailwind, Vercel</div>
-          <a href="https://tejer-con-pandy.vercel.app/" target="_blank" id="crochetBtn" class="text-indigo-600 font-medium mt-4 inline-flex items-center gap-1">
-            Visitar proyecto <span aria-hidden>→</span>
-          </a>
+          <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
+            <span class="text-xs text-gray-400">React · Vite · Tailwind</span>
+            <a href="https://tejer-con-pandy.vercel.app/" target="_blank" id="crochetBtn"
+               class="text-indigo-600 font-semibold text-sm hover:text-indigo-800 flex items-center gap-1">
+              Ver <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
         </div>
       </article>
 
     </div>
   </section>
 
-  <!-- EXPERIENCIA -->
-  <section id="experiencia" class="bg-gray-100 py-16">
+  <!-- ─── EXPERIENCIA ─── -->
+  <section id="experiencia" class="section-alt py-20">
     <div class="max-w-6xl mx-auto px-6">
-      <h2 id="experienceTitle" class="text-3xl font-bold text-center">Experiencia</h2>
-      <div class="mt-10 space-y-6">
-        <div class="bg-white p-6 rounded-lg shadow card-hover" data-aos="fade-up">
-          <h3 id="exp1Title" class="text-xl font-bold">Global Hitss para Telcel - Analista TI</h3>
-          <p id="exp1Desc" class="text-gray-600">Monitoreo de sistemas y análisis de rendimiento en tienda en línea. Análisis de errores en nodos de red. (2023 - Actual)</p>
+      <div class="text-center mb-3">
+        <span id="experienceLabel" class="text-indigo-500 text-xs font-semibold uppercase tracking-widest">Trayectoria</span>
+      </div>
+      <h2 id="experienceTitle" class="text-4xl font-bold text-center mb-14">Experiencia</h2>
+
+      <div class="max-w-3xl mx-auto space-y-8">
+
+        <div class="timeline-item" data-aos="fade-up">
+          <div class="timeline-dot"></div>
+          <div class="bg-white rounded-2xl p-6 card-glass ml-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+              <h3 id="exp1Title" class="text-lg font-bold">Global Hitss para Telcel — Analista TI</h3>
+              <span id="exp1Date" class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full whitespace-nowrap">2023 — Actual</span>
+            </div>
+            <p id="exp1Desc" class="text-gray-500 text-sm leading-relaxed">
+              Monitoreo de sistemas y análisis de rendimiento en tienda en línea. Análisis de errores en nodos de red.
+            </p>
+          </div>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow card-hover" data-aos="fade-up" data-aos-delay="100">
-          <h3 id="exp2Title" class="text-xl font-bold">Quaxar (Consultora) para Barcel y SYD - Desarrollador Fullstack</h3>
-          <p id="exp2Desc" class="text-gray-600">Manejo de CDP, desarrollo de herramientas internas y optimización web. Manejo de CDP para seguimiento de clientes de Tequila Don Julio. (2022 - 2023)</p>
+
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="timeline-dot"></div>
+          <div class="bg-white rounded-2xl p-6 card-glass ml-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+              <h3 id="exp2Title" class="text-lg font-bold">Quaxar — Desarrollador Fullstack</h3>
+              <span id="exp2Date" class="text-xs font-semibold text-violet-600 bg-violet-50 px-3 py-1 rounded-full whitespace-nowrap">2022 — 2023</span>
+            </div>
+            <p id="exp2Desc" class="text-gray-500 text-sm leading-relaxed">
+              Manejo de CDP, desarrollo de herramientas internas y optimización web para Barcel y SYD. CDP para seguimiento de clientes de Tequila Don Julio.
+            </p>
+          </div>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow card-hover" data-aos="fade-up" data-aos-delay="200">
-          <h3 id="exp3Title" class="text-xl font-bold">Freelance</h3>
-          <p id="exp3Desc" class="text-gray-600">Desarrollo de landing pages y aplicaciones web personalizadas para pequeñas empresas. (2019 - 2022)</p>
+
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+          <div class="timeline-dot"></div>
+          <div class="bg-white rounded-2xl p-6 card-glass ml-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+              <h3 id="exp3Title" class="text-lg font-bold">Freelance</h3>
+              <span id="exp3Date" class="text-xs font-semibold text-blue-600 bg-blue-50 px-3 py-1 rounded-full whitespace-nowrap">2019 — 2022</span>
+            </div>
+            <p id="exp3Desc" class="text-gray-500 text-sm leading-relaxed">
+              Desarrollo de landing pages y aplicaciones web personalizadas para pequeñas empresas.
+            </p>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- CONTACTO -->
-  <section id="contacto" class="max-w-6xl mx-auto px-6 py-16" data-aos="fade-up">
-    <h2 id="contactTitle" class="text-3xl font-bold text-center">Contacto</h2>
-    <p id="contactText" class="text-center text-gray-600 mt-4">¿Quieres trabajar conmigo? ¡Hablemos!</p>
-    <div class="mt-10 max-w-xl mx-auto">
-      <form id="whatsappForm" class="bg-white shadow rounded-lg p-8 space-y-6">
+  <!-- ─── CONTACTO ─── -->
+  <section id="contacto" class="max-w-6xl mx-auto px-6 py-20" data-aos="fade-up">
+    <div class="text-center mb-3">
+      <span id="contactLabel" class="text-indigo-500 text-xs font-semibold uppercase tracking-widest">Hablemos</span>
+    </div>
+    <h2 id="contactTitle" class="text-4xl font-bold text-center">Contacto</h2>
+    <p id="contactText" class="text-center text-gray-500 mt-3 mb-12">¿Quieres trabajar conmigo? ¡Hablemos!</p>
+
+    <div class="max-w-xl mx-auto">
+      <form id="whatsappForm" class="bg-white rounded-2xl shadow-xl shadow-gray-100/80 p-8 space-y-5 border border-gray-100">
         <div>
-          <label for="waName" class="block text-gray-700 font-medium mb-1">Nombre</label>
-          <input type="text" id="waName" name="waName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" placeholder="Tu nombre">
+          <label for="waName" class="block text-sm font-semibold text-gray-700 mb-1.5">Nombre</label>
+          <input type="text" id="waName" name="waName" required
+                 class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
+                 placeholder="Tu nombre">
         </div>
         <div>
-          <label for="waEmail" class="block text-gray-700 font-medium mb-1">Correo</label>
-          <input type="email" id="waEmail" name="waEmail" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" placeholder="tu@email.com">
+          <label for="waEmail" class="block text-sm font-semibold text-gray-700 mb-1.5">Correo</label>
+          <input type="email" id="waEmail" name="waEmail" required
+                 class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
+                 placeholder="tu@email.com">
         </div>
         <div>
-          <label for="waMsg" class="block text-gray-700 font-medium mb-1">Mensaje</label>
-          <textarea id="waMsg" name="waMsg" required rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" placeholder="Escribe tu mensaje..."></textarea>
+          <label for="waMsg" class="block text-sm font-semibold text-gray-700 mb-1.5">Mensaje</label>
+          <textarea id="waMsg" name="waMsg" required rows="4"
+                    class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all resize-none"
+                    placeholder="Escribe tu mensaje..."></textarea>
         </div>
-        <button type="submit" class="btn bg-green-500 hover:bg-green-600 text-white w-full font-semibold btn-anim">Enviar por WhatsApp</button>
+        <button type="submit"
+                class="w-full py-3 rounded-xl font-semibold text-sm text-white flex items-center justify-center gap-2
+                       bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600
+                       shadow-lg shadow-green-200 hover:shadow-green-300 hover:-translate-y-0.5 transition-all">
+          <i class="fab fa-whatsapp text-lg"></i> Enviar por WhatsApp
+        </button>
       </form>
-      <div class="flex flex-col md:flex-row justify-center gap-6 mt-8">
-        <a id="contactBtnEmail" href="mailto:jesushv875@gmail.com" class="btn btn-primary btn-anim">Enviar correo</a>
-        <a id="contactBtnWhats" href="https://wa.me/529212295670?text=Hola%20Jesús,%20quiero%20saber%20más%20de%20tu%20trabajo" target="_blank" class="btn bg-green-500 hover:bg-green-600 text-white btn-anim">Enviar WhatsApp</a>
-        <a id="contactBtnLinked" href="https://linkedin.com/in/jesuseduardohdez" target="_blank" class="btn bg-blue-700 hover:bg-blue-800 text-white btn-anim">Ver LinkedIn</a>
+
+      <div class="flex flex-col md:flex-row gap-3 mt-6">
+        <a id="contactBtnEmail" href="mailto:jesushv875@gmail.com"
+           class="btn btn-primary flex-1 justify-center">
+          <i class="fas fa-envelope"></i> Enviar correo
+        </a>
+        <a id="contactBtnWhats"
+           href="https://wa.me/529212295670?text=Hola%20Jesús,%20quiero%20saber%20más%20de%20tu%20trabajo"
+           target="_blank"
+           class="btn flex-1 justify-center text-white bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600">
+          <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+        <a id="contactBtnLinked" href="https://linkedin.com/in/jesuseduardohdez" target="_blank"
+           class="btn flex-1 justify-center text-white bg-[#0077b5] hover:bg-[#005e91]">
+          <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="bg-gray-900 text-white py-6" data-aos="fade-in">
-    <p class="text-center text-gray-400">© 2025 Jesús Eduardo Hernández Vázquez</p>
+  <!-- ─── FOOTER ─── -->
+  <footer class="bg-gray-900 text-white py-10">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-5">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-xl gradient-text">JE</span>
+        <span class="text-gray-400 text-sm">Jesús Eduardo Hernández Vázquez</span>
+      </div>
+      <p class="text-gray-500 text-sm">© 2025 · Hecho con <span class="text-indigo-400">♥</span> en México</p>
+      <div class="flex gap-5">
+        <a href="https://linkedin.com/in/jesuseduardohdez" target="_blank" class="text-gray-400 hover:text-white transition-colors" aria-label="LinkedIn">
+          <i class="fab fa-linkedin text-xl"></i>
+        </a>
+        <a href="mailto:jesushv875@gmail.com" class="text-gray-400 hover:text-white transition-colors" aria-label="Email">
+          <i class="fas fa-envelope text-xl"></i>
+        </a>
+        <a href="https://wa.me/529212295670" target="_blank" class="text-gray-400 hover:text-white transition-colors" aria-label="WhatsApp">
+          <i class="fab fa-whatsapp text-xl"></i>
+        </a>
+      </div>
+    </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- Scroll to top -->
+  <button id="scrollTop" aria-label="Volver arriba">
+    <i class="fas fa-chevron-up text-sm"></i>
+  </button>
+
+  <!-- ─── SCRIPTS ─── -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init({ duration: 1000, once: true });
+    AOS.init({ duration: 800, once: true, offset: 60 });
 
-    // --- Filtros Portafolio ---
+    // Hamburger
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    });
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+      link.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+    });
+
+    // Scroll to top
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+    });
+    scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Portfolio filters
     const filterBtns = document.querySelectorAll('.filter-btn');
     const cards = document.querySelectorAll('.project-card');
-
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const type = btn.getAttribute('data-filter');
-        filterBtns.forEach(b => b.classList.remove('filter-btn-active'));
-        btn.classList.add('filter-btn-active');
-
+        filterBtns.forEach(b => { b.classList.remove('filter-btn-active'); b.classList.add('text-gray-500'); });
+        btn.classList.add('filter-btn-active'); btn.classList.remove('text-gray-500');
         cards.forEach(card => {
-          const ctype = card.getAttribute('data-type');
-          if (type === 'all' || ctype === type) {
-            card.classList.remove('hidden');
-          } else {
-            card.classList.add('hidden');
-          }
+          const match = type === 'all' || card.getAttribute('data-type') === type;
+          card.classList.toggle('hidden', !match);
         });
       });
     });
 
-    // Deshabilitar HV hasta que esté live (quita esta sección cuando lo publiques)
-    const hvLink = document.getElementById('hvBtn');
-    hvLink.addEventListener('click', (e) => {
-      if (hvLink.classList.contains('disabled-link')) {
-        e.preventDefault();
-        alert('HV Solutions: próximamente. Actualizaré el enlace cuando el sitio esté en producción.');
-      }
-    });
-
-    // --- Traducciones ---
+    // ─── Translations ───
     const langBtn = document.getElementById('langBtn');
     let lang = 'es';
+
     const texts = {
       en: {
-        heroTitle: "Hi, I'm <span class='text-indigo-400'>Jesús Eduardo</span>",
-        navPortfolio: "Portfolio",
-        navExperience: "Experience",
-        navContact: "Contact",
+        navPortfolio: 'Portfolio', navExperience: 'Experience', navContact: 'Contact',
+        heroTitle: "Hi, I'm <br><span class='gradient-text'>Jesús Eduardo</span>",
         heroSubtitle: "Fullstack Developer with a Master's Degree in Information Technology.",
-        btnProjects: "View Projects",
-        btnLinkedIn: "View LinkedIn",
-        aboutTitle: "About Me",
+        btnProjects: 'View Projects', btnLinkedIn: 'View LinkedIn',
+        statYears: 'Years exp.', statProjects: 'Projects', statCompanies: 'Companies',
+        aboutLabel: 'Who I am', aboutTitle: 'About Me',
         aboutText: "I hold a degree in Computer Systems Management and a Master's in Information Technology. I have experience in fullstack development, data analysis, and cloud solutions. I am passionate about building functional and scalable applications, optimizing processes, and delivering technological solutions to real problems.",
-        skillsTitle: "Skills",
-        portfolioTitle: "Portfolio",
-        experienceTitle: "Experience",
-        contactTitle: "Contact",
-        contactText: "Want to work with me? Let's talk!",
-
-        // Projects
-        project1Title: "Telcel Online Store",
-        project1Desc: "Monitoring and performance analysis of the online store; network node error analysis via Global Hitss.",
-        project1Btn: "Visit project",
-        project2Title: "Auto Parts",
-        project2Desc: "Landing page for quotes and client contact.",
-        project2Btn: "Visit project",
-        project3Title: "Quaxar",
-        project3Desc: "Consultancy: service for Grupo Bimbo (Barcel) and SYD. CDP management for Tequila Don Julio customer tracking.",
-        project3Btn: "Visit project",
-
-        // Personal projects
-        hvTitle: "HV Solutions",
-        hvDesc: "My digital solutions venture website (services, contact, and portfolio).",
-        posTitle: "POS System",
-        posDesc: "Point of sale with inventory, in/out movements and cash closing.",
-        crochetTitle: "Tejer con Pandy",
-        crochetDesc: "Crochet site with catalog and order contact.",
-        hvBtn: "View site",
-        posBtn: "Visit project",
-        crochetBtn: "Visit project",
-
-        // Experience cards
-        exp1Title: "Global Hitss for Telcel - IT Analyst",
-        exp1Desc: "System monitoring and online store performance analysis. Network node error analysis. (2023 - Present)",
-        exp2Title: "Quaxar (Consultancy) for Grupo Bimbo (Barcel) and SYD - Fullstack Developer",
-        exp2Desc: "CDP management, internal tools development, and web optimization. CDP tracking for Tequila Don Julio customers. (2022 - 2023)",
-        exp3Title: "Freelance",
-        exp3Desc: "Development of landing pages and custom web applications for small businesses. (2019 - 2022)",
-
-        // Buttons contact
-        contactBtnEmail: "Send Email",
-        contactBtnWhats: "Send WhatsApp",
-        contactBtnLinked: "View LinkedIn"
+        skillsLabel: 'Technologies', skillsTitle: 'Skills',
+        portfolioLabel: 'My work', portfolioTitle: 'Portfolio',
+        experienceLabel: 'Career', experienceTitle: 'Experience',
+        contactLabel: "Let's talk", contactTitle: 'Contact',
+        contactText: 'Want to work with me? Let\'s talk!',
+        project1Title: 'Telcel Online Store', project1Desc: 'Monitoring and performance analysis; network node error analysis via Global Hitss.',
+        project2Title: 'Auto Parts', project2Desc: 'Landing page for quotes and client contact.',
+        project3Title: 'Quaxar', project3Desc: 'Consultancy for Grupo Bimbo (Barcel) and SYD. CDP management for Tequila Don Julio.',
+        hvTitle: 'HV Solutions', hvDesc: 'My digital solutions venture website (services, contact, and portfolio).',
+        posTitle: 'POS System', posDesc: 'Point of sale with inventory, in/out movements and cash closing.',
+        crochetTitle: 'Tejer con Pandy', crochetDesc: 'Crochet site with catalog and order contact.',
+        exp1Title: 'Global Hitss for Telcel — IT Analyst', exp1Date: '2023 — Present',
+        exp1Desc: 'System monitoring and online store performance analysis. Network node error analysis.',
+        exp2Title: 'Quaxar — Fullstack Developer', exp2Date: '2022 — 2023',
+        exp2Desc: 'CDP management, internal tools development, and web optimization for Barcel and SYD. CDP tracking for Tequila Don Julio customers.',
+        exp3Title: 'Freelance', exp3Date: '2019 — 2022',
+        exp3Desc: 'Development of landing pages and custom web applications for small businesses.',
+        contactBtnEmail: 'Send Email', contactBtnWhats: 'WhatsApp', contactBtnLinked: 'LinkedIn'
       },
       es: {
-        heroTitle: "Hola, soy <span class='text-indigo-400'>Jesús Eduardo</span>",
-        navPortfolio: "Portafolio",
-        navExperience: "Experiencia",
-        navContact: "Contacto",
-        heroSubtitle: "Desarrollador Fullstack con Maestría en Tecnologías de la Información.",
-        btnProjects: "Ver Proyectos",
-        btnLinkedIn: "Ver LinkedIn",
-        aboutTitle: "Sobre mí",
-        aboutText: "Soy egresado de la carrera de Sistemas Computacionales Administrativos y cuento con una Maestría en Tecnologías de la Información. Tengo experiencia en desarrollo fullstack, análisis de datos y soluciones en la nube. Me apasiona crear aplicaciones funcionales y escalables, optimizar procesos y aportar soluciones tecnológicas a problemas reales.",
-        skillsTitle: "Habilidades",
-        portfolioTitle: "Portafolio",
-        experienceTitle: "Experiencia",
-        contactTitle: "Contacto",
-        contactText: "¿Quieres trabajar conmigo? ¡Hablemos!",
-
-        project1Title: "Tienda en línea Telcel",
-        project1Desc: "Monitoreo y análisis de rendimiento de la tienda en línea; análisis de errores en nodos de red a través de Global Hitss.",
-        project1Btn: "Visitar proyecto",
-        project2Title: "Auto Refacciones",
-        project2Desc: "Landing page para cotizaciones y contacto con clientes.",
-        project2Btn: "Visitar proyecto",
-        project3Title: "Quaxar",
-        project3Desc: "Consultora: servicio a Grupo Bimbo (Barcel) y SYD. Manejo de CDP para seguimiento de clientes de Tequila Don Julio.",
-        project3Btn: "Visitar proyecto",
-
-        hvTitle: "HV Solutions",
-        hvDesc: "Web de mi emprendimiento de soluciones digitales (servicios, contacto y portafolio).",
-        posTitle: "POS System",
-        posDesc: "Sistema de punto de venta con inventario, entradas/salidas y corte de caja.",
-        crochetTitle: "Tejer con Pandy",
-        crochetDesc: "Sitio de crochet con catálogo y contacto para pedidos.",
-        hvBtn: "Ver sitio",
-        posBtn: "Visitar proyecto",
-        crochetBtn: "Visitar proyecto",
-
-        // Tarjetas de experiencia
-        exp1Title: "Global Hitss para Telcel - Analista TI",
-        exp1Desc: "Monitoreo de sistemas y análisis de rendimiento en tienda en línea. Análisis de errores en nodos de red. (2023 - Actual)",
-        exp2Title: "Quaxar (Consultora) para Grupo Bimbo (Barcel) y SYD - Desarrollador Fullstack",
-        exp2Desc: "Manejo de CDP, desarrollo de herramientas internas y optimización web. Manejo de CDP para seguimiento de clientes de Tequila Don Julio. (2022 - 2023)",
-        exp3Title: "Freelance",
-        exp3Desc: "Desarrollo de landing pages y aplicaciones web personalizadas para pequeñas empresas. (2019 - 2022)",
-
-        contactBtnEmail: "Enviar correo",
-        contactBtnWhats: "Enviar WhatsApp",
-        contactBtnLinked: "Ver LinkedIn"
+        navPortfolio: 'Portafolio', navExperience: 'Experiencia', navContact: 'Contacto',
+        heroTitle: "Hola, soy <br><span class='gradient-text'>Jesús Eduardo</span>",
+        heroSubtitle: 'Desarrollador Fullstack con Maestría en Tecnologías de la Información.',
+        btnProjects: 'Ver Proyectos', btnLinkedIn: 'Ver LinkedIn',
+        statYears: 'Años exp.', statProjects: 'Proyectos', statCompanies: 'Empresas',
+        aboutLabel: 'Quién soy', aboutTitle: 'Sobre mí',
+        aboutText: 'Soy egresado de la carrera de Sistemas Computacionales Administrativos y cuento con una Maestría en Tecnologías de la Información. Tengo experiencia en desarrollo fullstack, análisis de datos y soluciones en la nube. Me apasiona crear aplicaciones funcionales y escalables, optimizar procesos y aportar soluciones tecnológicas a problemas reales.',
+        skillsLabel: 'Tecnologías', skillsTitle: 'Habilidades',
+        portfolioLabel: 'Mi trabajo', portfolioTitle: 'Portafolio',
+        experienceLabel: 'Trayectoria', experienceTitle: 'Experiencia',
+        contactLabel: 'Hablemos', contactTitle: 'Contacto',
+        contactText: '¿Quieres trabajar conmigo? ¡Hablemos!',
+        project1Title: 'Tienda en línea Telcel', project1Desc: 'Monitoreo y análisis de rendimiento; análisis de errores en nodos de red vía Global Hitss.',
+        project2Title: 'Auto Refacciones', project2Desc: 'Landing page para cotizaciones y contacto con clientes.',
+        project3Title: 'Quaxar', project3Desc: 'Consultora para Grupo Bimbo (Barcel) y SYD. CDP para seguimiento de clientes de Tequila Don Julio.',
+        hvTitle: 'HV Solutions', hvDesc: 'Web de mi emprendimiento de soluciones digitales (servicios, contacto y portafolio).',
+        posTitle: 'POS System', posDesc: 'Sistema de punto de venta con inventario, entradas/salidas y corte de caja.',
+        crochetTitle: 'Tejer con Pandy', crochetDesc: 'Sitio de crochet con catálogo y contacto para pedidos.',
+        exp1Title: 'Global Hitss para Telcel — Analista TI', exp1Date: '2023 — Actual',
+        exp1Desc: 'Monitoreo de sistemas y análisis de rendimiento en tienda en línea. Análisis de errores en nodos de red.',
+        exp2Title: 'Quaxar — Desarrollador Fullstack', exp2Date: '2022 — 2023',
+        exp2Desc: 'Manejo de CDP, desarrollo de herramientas internas y optimización web para Barcel y SYD. CDP para seguimiento de clientes de Tequila Don Julio.',
+        exp3Title: 'Freelance', exp3Date: '2019 — 2022',
+        exp3Desc: 'Desarrollo de landing pages y aplicaciones web personalizadas para pequeñas empresas.',
+        contactBtnEmail: 'Enviar correo', contactBtnWhats: 'WhatsApp', contactBtnLinked: 'LinkedIn'
       }
     };
 
-    function applyTexts(t){
-      document.getElementById('heroTitle').innerHTML = t.heroTitle;
-      document.getElementById('heroSubtitle').textContent = t.heroSubtitle;
-      document.getElementById('btnProjects').textContent = t.btnProjects;
-      document.getElementById('btnLinkedIn').textContent = t.btnLinkedIn;
-
-      document.getElementById('aboutTitle').textContent = t.aboutTitle;
-      document.getElementById('aboutText').textContent = t.aboutText;
-      document.getElementById('skillsTitle').textContent = t.skillsTitle;
-      document.getElementById('navPortfolio').textContent = t.navPortfolio;
-      document.getElementById('navExperience').textContent = t.navExperience;
-      document.getElementById('navContact').textContent = t.navContact;
-
-      document.getElementById('portfolioTitle').textContent = t.portfolioTitle;
-      document.getElementById('experienceTitle').textContent = t.experienceTitle;
-
-      // Experience cards
-      document.getElementById('exp1Title').textContent = t.exp1Title;
-      document.getElementById('exp1Desc').textContent = t.exp1Desc;
-      document.getElementById('exp2Title').textContent = t.exp2Title;
-      document.getElementById('exp2Desc').textContent = t.exp2Desc;
-      document.getElementById('exp3Title').textContent = t.exp3Title;
-      document.getElementById('exp3Desc').textContent = t.exp3Desc;
-
-      // Empleo projects
-      document.getElementById('project1Title').textContent = t.project1Title;
-      document.getElementById('project1Desc').textContent = t.project1Desc;
-      document.getElementById('project1Btn').textContent = t.project1Btn;
-
-      document.getElementById('project2Title').textContent = t.project2Title;
-      document.getElementById('project2Desc').textContent = t.project2Desc;
-      document.getElementById('project2Btn').textContent = t.project2Btn;
-
-      document.getElementById('project3Title').textContent = t.project3Title;
-      document.getElementById('project3Desc').textContent = t.project3Desc;
-      document.getElementById('project3Btn').textContent = t.project3Btn;
-
-      // Personal projects
-      document.getElementById('hvTitle').textContent = t.hvTitle;
-      document.getElementById('hvDesc').textContent = t.hvDesc;
-
-      document.getElementById('posTitle').textContent = t.posTitle;
-      document.getElementById('posDesc').textContent = t.posDesc;
-
-      document.getElementById('crochetTitle').textContent = t.crochetTitle;
-      document.getElementById('crochetDesc').textContent = t.crochetDesc;
-      document.getElementById('hvBtn').textContent = t.hvBtn;
-      document.getElementById('posBtn').textContent = t.posBtn;
-      document.getElementById('crochetBtn').textContent = t.crochetBtn;
-
-      document.getElementById('contactTitle').textContent = t.contactTitle;
-      document.getElementById('contactText').textContent = t.contactText;
-      document.getElementById('contactBtnEmail').textContent = t.contactBtnEmail;
-      document.getElementById('contactBtnWhats').textContent = t.contactBtnWhats;
-      document.getElementById('contactBtnLinked').textContent = t.contactBtnLinked;
-
+    function applyTexts(t) {
+      const set = (id, val) => { const el = document.getElementById(id); if (el) el.innerHTML = val; };
+      const txt = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+      set('heroTitle', t.heroTitle);
+      txt('heroSubtitle', t.heroSubtitle);
+      set('btnProjects',  `<i class="fas fa-rocket"></i> ${t.btnProjects}`);
+      set('btnLinkedIn',  `<i class="fab fa-linkedin"></i> ${t.btnLinkedIn}`);
+      txt('statYears', t.statYears); txt('statProjects', t.statProjects); txt('statCompanies', t.statCompanies);
+      txt('aboutLabel', t.aboutLabel); txt('aboutTitle', t.aboutTitle); txt('aboutText', t.aboutText);
+      txt('skillsLabel', t.skillsLabel); txt('skillsTitle', t.skillsTitle);
+      txt('portfolioLabel', t.portfolioLabel); txt('portfolioTitle', t.portfolioTitle);
+      txt('experienceLabel', t.experienceLabel); txt('experienceTitle', t.experienceTitle);
+      txt('contactLabel', t.contactLabel); txt('contactTitle', t.contactTitle); txt('contactText', t.contactText);
+      txt('navPortfolio', t.navPortfolio); txt('navExperience', t.navExperience); txt('navContact', t.navContact);
+      // Projects
+      txt('project1Title', t.project1Title); txt('project1Desc', t.project1Desc);
+      txt('project2Title', t.project2Title); txt('project2Desc', t.project2Desc);
+      txt('project3Title', t.project3Title); txt('project3Desc', t.project3Desc);
+      txt('hvTitle', t.hvTitle); txt('hvDesc', t.hvDesc);
+      txt('posTitle', t.posTitle); txt('posDesc', t.posDesc);
+      txt('crochetTitle', t.crochetTitle); txt('crochetDesc', t.crochetDesc);
+      ['project1Btn','project2Btn','project3Btn','hvBtn','posBtn','crochetBtn'].forEach(id => {
+        set(id, `Ver <i class="fas fa-arrow-right text-xs"></i>`);
+      });
+      // Experience
+      txt('exp1Title', t.exp1Title); txt('exp1Date', t.exp1Date); txt('exp1Desc', t.exp1Desc);
+      txt('exp2Title', t.exp2Title); txt('exp2Date', t.exp2Date); txt('exp2Desc', t.exp2Desc);
+      txt('exp3Title', t.exp3Title); txt('exp3Date', t.exp3Date); txt('exp3Desc', t.exp3Desc);
+      // Contact
+      set('contactBtnEmail',  `<i class="fas fa-envelope"></i> ${t.contactBtnEmail}`);
+      set('contactBtnWhats',  `<i class="fab fa-whatsapp"></i> ${t.contactBtnWhats}`);
+      set('contactBtnLinked', `<i class="fab fa-linkedin"></i> ${t.contactBtnLinked}`);
       langBtn.textContent = lang === 'es' ? 'EN' : 'ES';
     }
 
@@ -488,20 +798,14 @@
       applyTexts(texts[lang]);
     });
 
-    // --- WhatsApp Formulario contacto ---
-    document.addEventListener('DOMContentLoaded', function () {
-      var waForm = document.getElementById('whatsappForm');
-      if (waForm) {
-        waForm.addEventListener('submit', function (e) {
-          e.preventDefault();
-          var nombre = document.getElementById('waName').value.trim();
-          var correo = document.getElementById('waEmail').value.trim();
-          var mensaje = document.getElementById('waMsg').value.trim();
-          var texto = `Hola Jesús, soy ${nombre}. Mi correo es ${correo}. ${mensaje}`;
-          var url = 'https://wa.me/529212295670?text=' + encodeURIComponent(texto);
-          window.open(url, '_blank');
-        });
-      }
+    // WhatsApp form
+    document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre  = document.getElementById('waName').value.trim();
+      const correo  = document.getElementById('waEmail').value.trim();
+      const mensaje = document.getElementById('waMsg').value.trim();
+      const texto   = `Hola Jesús, soy ${nombre}. Mi correo es ${correo}. ${mensaje}`;
+      window.open('https://wa.me/529212295670?text=' + encodeURIComponent(texto), '_blank');
     });
   </script>
 </body>
